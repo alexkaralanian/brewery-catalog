@@ -6,11 +6,9 @@ import { BrowserRouter } from 'react-router-dom';
 import BreweryDetails from './BreweryDetails';
 
 describe('Brewery Details', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     fetch.resetMocks();
-  });
 
-  test('renders', async () => {
     await fetch.mockResponse(
       JSON.stringify({
         name: 'Banjo Brewing',
@@ -20,7 +18,9 @@ describe('Brewery Details', () => {
         phone: '3042164231',
       })
     );
+  });
 
+  test('renders', async () => {
     render(<BreweryDetails />, {
       wrapper: BrowserRouter,
     });
