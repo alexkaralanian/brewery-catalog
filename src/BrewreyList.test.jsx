@@ -2,7 +2,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 import BreweryList from './BreweryList';
 
