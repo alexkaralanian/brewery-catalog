@@ -22,15 +22,36 @@ const BreweryDetails = () => {
     fetchBreweries();
   }, [params.id]);
 
+  function formatPhoneNumber(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    }
+    return null;
+  }
+
   return (
     <div className="BreweryDetails">
       <h1>{breweryDetails.name}</h1>
       <div>{`${breweryDetails.city}, ${breweryDetails.state}`}</div>
       <div>{`${breweryDetails.country}`} </div>
 
-      {breweryDetails.phone && <div>Phone: {`${breweryDetails.phone}`} </div>}
+      {breweryDetails.phone && (
+        <div>
+          Phone:{' '}
+          <a href={`tel:${breweryDetails.phone}`}>{`${formatPhoneNumber(
+            breweryDetails.phone
+          )}`}</a>
+        </div>
+      )}
       {breweryDetails.website_url && (
-        <div>Web: {`${breweryDetails.website_url}`} </div>
+        <div>
+          Web:{' '}
+          <a href={breweryDetails.website_url}>
+            {`${breweryDetails.website_url}`}{' '}
+          </a>
+        </div>
       )}
     </div>
   );

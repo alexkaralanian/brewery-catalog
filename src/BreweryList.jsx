@@ -41,7 +41,8 @@ const BreweryList = () => {
           breweries
             .filter(
               (brewery) =>
-                brewery.name.toLowerCase().includes(searchTerm) && brewery
+                brewery.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+                brewery
             )
             .map((brewery) => (
               <li key={brewery.id}>
