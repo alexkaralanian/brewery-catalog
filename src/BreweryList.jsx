@@ -7,11 +7,15 @@ const BreweryList = () => {
 
   useEffect(() => {
     const fetchBreweries = async () => {
-      const response = await fetch(
-        'https://api.openbrewerydb.org/breweries?per_page=10'
-      );
-      const data = await response.json();
-      setBreweries(data);
+      try {
+        const response = await fetch(
+          'https://api.openbrewerydb.org/breweries?per_page=10'
+        );
+        const data = await response.json();
+        setBreweries(data);
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     fetchBreweries();
@@ -34,23 +38,18 @@ const BreweryList = () => {
       <ul>
         {breweries.length > 0 &&
           breweries
-            .filter((brewery) => {
-              if (brewery.name.toLowerCase().includes(searchTerm)) {
-                return brewery;
-              } else {
-                return null;
-              }
-            })
-            .map((brewery) => {
-              return (
-                <li>
-                  <Link to={`/${brewery.id}`}>
-                    <h4>{brewery.name}</h4>
-                  </Link>
-                  <div>{`${brewery.city}, ${brewery.state}`}, </div>
-                </li>
-              );
-            })}
+            .filter(
+              (brewery) =>
+                brewery.name.toLowerCase().includes(searchTerm) && brewery
+            )
+            .map((brewery) => (
+              <li key={brewery.id}>
+                <Link to={`/${brewery.id}`}>
+                  <h4>{brewery.name}</h4>
+                </Link>
+                <div>{`${brewery.city}, ${brewery.state}`}, </div>
+              </li>
+            ))}
       </ul>
     </div>
   );

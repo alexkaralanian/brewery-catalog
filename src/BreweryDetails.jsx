@@ -8,11 +8,15 @@ const BreweryDetails = () => {
 
   useEffect(() => {
     const fetchBreweries = async () => {
-      const response = await fetch(
-        `https://api.openbrewerydb.org/breweries/${params.id}`
-      );
-      const data = await response.json();
-      setBreweryDetails(data);
+      try {
+        const response = await fetch(
+          `https://api.openbrewerydb.org/breweries/${params.id}`
+        );
+        const data = await response.json();
+        setBreweryDetails(data);
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     fetchBreweries();
