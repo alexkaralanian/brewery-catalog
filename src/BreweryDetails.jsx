@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 const BreweryDetails = () => {
   let params = useParams();
 
-  const [breweryDetails, setBreweryDetails] = useState([]);
+  const [breweryDetails, setBreweryDetails] = useState({});
 
   useEffect(() => {
     const fetchBreweries = async () => {

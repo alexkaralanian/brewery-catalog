@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const BreweryList = () => {
-  const [breweries, setBreweries] = useState({});
+  const [breweries, setBreweries] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -29,13 +29,14 @@ const BreweryList = () => {
     <div>
       <h1>Brewery List</h1>
       <input
+        data-testid="search-input"
         onChange={handleChange}
         className="SearchInput"
         type="text"
         value={searchTerm}
         placeholder="Search Breweries..."
       />
-      <ul>
+      <ul data-testid="brewery-list">
         {breweries.length > 0 &&
           breweries
             .filter(
